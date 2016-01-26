@@ -1,0 +1,47 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title 00PS Apps 
+    meta(name='description', content='Source code generated using layoutit.com')
+    meta(name='author', content='LayoutIt!')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/style.css', rel='stylesheet')
+  body
+    .container-fluid
+      .row
+        .col-md-12
+          nav.navbar.navbar-default.navbar-inverse(role='navigation')
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='#') Brand
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li.active
+                  a(href='#') Link
+                li
+                  a(href='#') Link
+              
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='#') Link
+                li.dropdown
+                  
+      .row
+        .col-md-2
+        .col-md-8
+          .row
+            .col-md-12
+              block content
+          .row
+            .col-md-12
+        .col-md-2
+    script(src='js/jquery.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/scripts.js')

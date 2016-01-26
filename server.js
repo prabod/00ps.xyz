@@ -2,6 +2,23 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
+var passport = require('passport')
+  , util = require('util')
+  , FacebookStrategy = require('passport-facebook').Strategy
+  , logger = require('morgan')
+  , session = require('express-session')
+  , bodyParser = require("body-parser")
+  , cookieParser = require("cookie-parser")
+  , methodOverride = require('method-override');
+  var mongoStore = require('connect-mongo')(session);
+  var mongoose = require('mongoose');
+  var autoIncrement = require('mongoose-auto-increment');
+  var config = require('./config');
+  var fb = require('fb');
+  var FACEBOOK_APP_ID = "1653824821565450";
+  var FACEBOOK_APP_SECRET = "8887aeba96c5dc4312b9475cf1db775c";
+
+
 
 
 /**
@@ -92,19 +109,6 @@ var SampleApp = function() {
     /**
      *  Create the routing table entries + handlers for the application.
      */
-    self.createRoutes = function() {
-        self.routes = { };
-
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
-        self.routes['/'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
-        };
-    };
 
 
     /**
@@ -112,15 +116,77 @@ var SampleApp = function() {
      *  the handlers.
      */
     self.initializeServer = function() {
-        self.createRoutes();
         self.app = express.createServer();
+        // configure Express
+        self.app.config = config;
 
-        //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
-        }
+
+        //setup mongoose
+        self.app.db = mongoose.createConnection(config.mongodb.uri);
+        self.app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
+        autoIncrement.initialize(self.app.db);
+        self.app.autoIncrement = autoIncrement;
+        self.app.db.once('open', function() {
+            //and... we have a data store
+        });
+
+
+        self.app.set('views', __dirname + '/views');
+        self.app.set('view engine', 'jade');
+        self.app.use(logger('combined'));
+        self.app.use(cookieParser('prabod'));
+        self.app.use(bodyParser.json());
+        self.app.use(bodyParser.urlencoded({extended: true}));
+        self.app.use(methodOverride());
+        self.app.use(session({
+            resave: true,
+            saveUninitialized: true,
+            secret: config.cryptoKey,
+            store: new mongoStore({url: config.mongodb.uri})
+        }));
+        // Initialize Passport!  Also use passport.session() middleware, to support
+        // persistent login sessions (recommended).
+        self.app.use(passport.initialize());
+        self.app.use(passport.session());
+        self.app.use(express.static(__dirname + '/public'));
+        self.app.get('/', function(req, res){
+          res.render('base');
+        });
+        require('./routes')(self.app, passport);
     };
 
+    self.passportIni = function () {
+      passport.serializeUser(function(user, done) {
+        done(null, user);
+      });
+
+      passport.deserializeUser(function(obj, done) {
+        done(null, obj);
+      });
+
+
+      // Use the FacebookStrategy within Passport.
+      //   Strategies in Passport require a `verify` function, which accept
+      //   credentials (in this case, an accessToken, refreshToken, and Facebook
+      //   profile), and invoke a callback with a user object.
+      passport.use(new FacebookStrategy({
+          clientID: FACEBOOK_APP_ID,
+          clientSecret: FACEBOOK_APP_SECRET,
+          callbackURL: "http://" + self.ipaddress + ":" + self.port + "/auth/facebook/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+          // asynchronous verification, for effect...
+          process.nextTick(function () {
+
+            // To keep the example simple, the user's Facebook profile is returned to
+            // represent the logged-in user.  In a typical application, you would want
+            // to associate the Facebook account with a user record in your database,
+            // and return that user instead.
+            return done(null, profile);
+          });
+        }
+      ));
+    }
 
     /**
      *  Initializes the sample application.
@@ -129,9 +195,10 @@ var SampleApp = function() {
         self.setupVariables();
         self.populateCache();
         self.setupTerminationHandlers();
-
+        self.passportIni();
         // Create the express server and routes.
         self.initializeServer();
+
     };
 
 
@@ -156,4 +223,3 @@ var SampleApp = function() {
 var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
-
