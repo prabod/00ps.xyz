@@ -1,4 +1,6 @@
 extends base
 
 block content
-  img(src=#{image})
+  img.img1(src= "#{image}")
+  button#sharefb.btn.btn-primary.btn-block.btn-lg(type='button' onClick='shareFb()')
+      | Share On Facebook

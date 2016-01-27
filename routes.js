@@ -15,38 +15,40 @@ exports = module.exports = function(app, passport) {
   //   request.  The first step in Facebook authentication will involve
   //   redirecting the user to facebook.com.  After authorization, Facebook will
   //   redirect the user back to this application at /auth/facebook/callback
-  app.get('/auth/facebook/',
-    passport.authenticate('facebook'),
-    function(req, res) {
+  //app.get('/auth/facebook/',
+    //passport.authenticate('facebook'),
+    //function(req, res) {
       // The request will be redirected to Facebook for authentication, so this
       // function will not be called.
-    });
+    //});
   app.get('/worth', worth.worth);
-  /*app.get('/auth/facebook/:id', function(req, res, next) {
-    passport.authenticate(
-      'facebook', {
-        callbackURL: "/auth/facebook/callback/" + req.params.id
-      }
-    )(req, res, next);
-  });
-*/
-  // GET /auth/facebook/callback
-  //   Use passport.authenticate() as route middleware to authenticate the
-  //   request.  If authentication fails, the user will be redirected back to the
-  //   login page.  Otherwise, the primary route function function will be called,
-  //   which, in this example, will redirect the user to the home page.
-  app.get('/auth/facebook/callback/',
-    passport.authenticate('facebook', {
-      failureRedirect: '/login'
-    }),
-    function(req, res) {
-      res.redirect('/');
-    });
+  app.get('/auth/facebook/:id', function(req,res,next) {
+  passport.authenticate(
+    'facebook',
+     {callbackURL: '/auth/facebook/login_callback/'+req.params.id }
+  )(req,res,next);
+});
+
+app.get('/auth/facebook/login_callback/:id', function(req,res,next) {
+  passport.authenticate(
+    'facebook',
+     {
+       callbackURL:"/auth/facebook/login_callback/"+req.params.id
+     , successRedirect:"/"+req.params.id
+     , failureRedirect:"/"
+     }
+   ) (req,res,next);
+ });
 
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
   });
+  app.post('/tempDel/:id', function(req, res) {
+    var fs = require('fs');
+    console.log(req.params.id);
+    fs.unlinkSync('../data/public/' + req.params.id);
+  })
 
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
