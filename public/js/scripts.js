@@ -30,7 +30,7 @@ function shareFb() {
   FB.ui({
     method: 'feed',
     link: $("meta[property='og:url']").attr("content"),
-    //caption: $("meta[property='og:description']").attr("content"),
+    caption: $("meta[property='og:description']").attr("content"),
     image : $("meta[property='og:image']").attr("content"),
     scrape : true
   }, function(response) {
