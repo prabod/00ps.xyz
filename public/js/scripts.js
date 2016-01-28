@@ -28,7 +28,6 @@ function shareFb() {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
     var e = $("meta[property='og:url']").attr("content");
-    e += '?ref=share';
     var t = 626,
       o = 496,
       n = screen.width / 2 - t / 2,
