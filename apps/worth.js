@@ -50,12 +50,12 @@ exports.worth = function(req, res) {
 
 exports.display = function(req, res) {
   res.render('worthPost', {
-    image: req.user.path,
+    image: "http://fb.00ps.xyz/worth/"+req.params.id+".png",
     user : req.user.id,
     title: "Find Your Net Worth in 10 Years",
-    url: "http://fb.00ps.xyz/worth/"+req.user.id,
+    url: "http://fb.00ps.xyz/worth/"+req.params.id,
     description: "Click Here to Find your Net Worth in 10 Years",
     IDecription: "Click Here to Find your Net Worth in 10 Years",
-    imageLink: "http://fb.00ps.xyz/worth" + req.user.path
+    imageLink: "http://fb.00ps.xyz/worth/"+req.params.id
   });
 }
