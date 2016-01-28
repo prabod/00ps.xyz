@@ -21,7 +21,7 @@ exports = module.exports = function(app, passport) {
       // The request will be redirected to Facebook for authentication, so this
       // function will not be called.
     //});
-  app.get('/worth', worth.worth);
+  app.get('/worth/', worth.worth);
   app.get('/auth/facebook/:id', function(req,res,next) {
   passport.authenticate(
     'facebook',
@@ -44,10 +44,10 @@ app.get('/auth/facebook/login_callback/:id', function(req,res,next) {
     req.logout();
     res.redirect('/');
   });
-  app.post('/tempDel/:id', function(req, res) {
+  app.post('/tempDel/:id/:photo', function(req, res) {
     var fs = require('fs');
     console.log(req.params.id);
-    fs.unlinkSync('../data/public/' + req.params.id);
+    fs.unlinkSync('../data/public/' + req.params.id + "/" + req.params.photo);
   })
 
   function ensureAuthenticated(req, res, next) {

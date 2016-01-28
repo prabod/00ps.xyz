@@ -27,20 +27,31 @@ exports.worth = function(req, res) {
       });
     };
     var userId = req.user.id;
-      var name = '../data/public/' + Date.now() + '.jpg';
+      var name = '../data/public/worth/' + Date.now() + '.jpg';
       var des;
       download(req.user.photos[0].value, name, function() {
         console.log('done');
-        des = '../data/public/'+ Date.now()+'.png';
+        des = '../data/public/worth/'+ userId+'.png';
         compositeImage('networrth.png', name, des ,function () {
           res.render('worthPost', {
-            image: des.substring(15)
+            image: "/"+des.substring(15),
+            title : "Find Your Net Worth in 10 Years",
+            url : "http://fb.00ps.xyz/worth/",
+            description : "Click Here to Find your Net Worth in 10 Years",
+            IDecription : "Click Here to Find your Net Worth in 10 Years",
+            imageLink : "/"+des.substring(15)
           });
         });
 
       });
 
   } else {
-    res.render('worthPre');
+    res.render('worthPre',{
+      title : "Find Your Net Worth in 10 Years",
+      url : "http://fb.00ps.xyz/worth/",
+      description : "Click Here to Find your Net Worth in 10 Years",
+      IDecription : "Click Here to Find your Net Worth in 10 Years",
+      imageLink : ""
+    });
   }
 }

@@ -1,9 +1,9 @@
 function restoreSettings() {
-  var filename = $('img').attr('src');
+  var filename = $('.img1').attr('src');
   //alert( $('img').prop('src') );
   //alert( $('img').prop('src') );
   $.ajax({
-    url: '/tempDel/' + filename,
+    url: '/tempDel' + filename,
     type: 'POST',
   });
   console.log(filename);
@@ -33,6 +33,14 @@ function shareFb() {
     caption: 'An example caption',
   }, function(response) {});
 }
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72946878-1', 'auto');
+  ga('send', 'pageview');
 
 function fbShare(url, title, descr, image, winWidth, winHeight) {
         var winTop = (screen.height / 2) - (winHeight / 2);
