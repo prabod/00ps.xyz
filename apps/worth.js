@@ -54,7 +54,7 @@ exports.display = function(req, res) {
     image: "http://fb.00ps.xyz/worth/"+req.params.id+".png",
     user : req.params.id,
     title: "Find Your Net Worth in 10 Years",
-    url: "http://fb.00ps.xyz/worth/",
+    url: "http://fb.00ps.xyz/worth/"+req.params.id,
     description: "Click Here to Find your Net Worth in 10 Years",
     IDecription: "Click Here to Find your Net Worth in 10 Years",
     imageLink: "http://fb.00ps.xyz/worth/"+req.params.id+".png"
