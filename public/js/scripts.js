@@ -27,14 +27,13 @@ function shareFb() {
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-  FB.ui({
-    method: 'feed',
-    link: $("meta[property='og:url']").attr("content"),
-    caption: $("meta[property='og:description']").attr("content"),
-    image : $("meta[property='og:image']").attr("content"),
-    scrape : true
-  }, function(response) {
-    ga('send', 'event', 'Html', 'Share Result', $("meta[property='og:title']").attr("content"), { 'nonInteraction': 1 });
+  (function() {
+    var e = $("meta[property='og:url']").attr("content");
+    var t = 626,
+      o = 496,
+      n = screen.width / 2 - t / 2,
+      r = screen.height / 2 - o / 2 - 50;
+    window.open("https://www.facebook.com/sharer/sharer.php?u=" + e, "facebook-share-dialog", "width=" + t + ",height=" + o + ",top=" + r + ",left=" + n)
   });
 }
 
