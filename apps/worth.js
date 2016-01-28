@@ -54,6 +54,12 @@ exports.display = function(req, res) {
   if (!fs.existsSync('../data/public/worth/' + req.params.id + ".png")) {
     res.redirect('/worth/');
   } else {
+    var topA;
+    if (req.isAuthenticated()) {
+      topA = 'Try Again';
+    } else {
+      topA = 'Click Here to Find your Net Worth in 10 Years';
+    }
     res.render('worthPost', {
       image: "/worth/" + req.params.id + ".png",
       user: "fb.00ps.xyz",
@@ -61,7 +67,8 @@ exports.display = function(req, res) {
       url: "http://fb.00ps.xyz/worth/" + req.params.id,
       description: "Click Here to Find your Net Worth in 10 Years",
       IDecription: "Click Here to Find your Net Worth in 10 Years",
-      imageLink: "http://fb.00ps.xyz/worth/" + req.params.id + ".png"
+      imageLink: "http://fb.00ps.xyz/worth/" + req.params.id + ".png",
+      topA: topA
     });
   }
 }

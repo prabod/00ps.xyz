@@ -1,12 +1,22 @@
 extends base
 
 block content
-  img.img1(src= "#{image}")
-  button#sharefb.btn.btn-primary.btn-block.btn-lg(type='button' onClick='shareFb()')
-      | Share On Facebook
+  .row
+    a.btn.btn-success.btn-lg.btn-block(href='#', type='button', contenteditable='true', autocomplete='off')
+      |"#{topA}"
+    br
+  .row
+    img.img1(src= "#{image}")
+    br
+  .row
+    button#sharefb.btn.btn-primary.btn-block.btn-lg(type='button' onClick='shareFb()')
+        | Share On Facebook
 
 block comment
-  .fb-like(data-href='https://www.facebook.com/00ps.xyz/', data-layout='standard', data-action='like', data-show-faces='true', data-share='true')
-  br
-  br
-  .fb-comments(data-href='http://fb.00ps.xyz/worth', data-width='600', data-numposts='5')
+  .row
+    .fb-like(data-href='https://www.facebook.com/00ps.xyz/', data-layout='standard', data-action='like', data-show-faces='true', data-share='true')
+    br
+  .row
+    br
+    .fb-comments(data-href='http://fb.00ps.xyz/worth', data-width='600', data-numposts='5')
+    
