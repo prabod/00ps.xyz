@@ -50,7 +50,7 @@ exports.worth = function(req, res) {
 }
 
 exports.display = function(req, res) {
-  if (res.query.res) {
+  if (Object.keys(req.query).length !== 0) {
     res.redirect('/worth/');
   } else {
     res.render('worthPost', {
