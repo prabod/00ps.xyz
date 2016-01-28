@@ -30,10 +30,12 @@ function shareFb() {
   FB.ui({
     method: 'feed',
     link: $("meta[property='og:url']").attr("content"),
-    caption: $("meta[property='og:description']").attr("content"),
+    //caption: $("meta[property='og:description']").attr("content"),
     image : $("meta[property='og:image']").attr("content"),
     scrape : true
-  }, function(response) {});
+  }, function(response) {
+    console.log(response);
+  });
 }
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -43,9 +45,3 @@ function shareFb() {
 
   ga('create', 'UA-72946878-1', 'auto');
   ga('send', 'pageview');
-
-function fbShare(url, title, descr, image, winWidth, winHeight) {
-        var winTop = (screen.height / 2) - (winHeight / 2);
-        var winLeft = (screen.width / 2) - (winWidth / 2);
-        window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-    }
