@@ -34,13 +34,13 @@ exports.worth = function(req, res) {
       compositeImage('networrth.png', name, des, function() {
         req.user.path = "/" + des.substring(15);
         res.render('worthPost', {
-          image: "/worth/"+req.params.id+".png",
+          image: "/worth/"+req.user.id+".png",
           user : "fb.00ps.xyz",
           title: "Find Your Net Worth in 10 Years",
           url: "http://fb.00ps.xyz/worth/",
           description: "Click Here to Find your Net Worth in 10 Years",
           IDecription: "Click Here to Find your Net Worth in 10 Years",
-          imageLink: "http://fb.00ps.xyz/worth/"+req.params.id+".png"
+          imageLink: "http://fb.00ps.xyz/worth/"+req.user.id+".png"
         });
       });
     });
