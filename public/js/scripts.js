@@ -34,7 +34,7 @@ function shareFb() {
     image : $("meta[property='og:image']").attr("content"),
     scrape : true
   }, function(response) {
-    console.log(response);
+    ga('send', 'event', 'Html', 'Share Result', $("meta[property='og:title']").attr("content"), { 'nonInteraction': 1 });
   });
 }
 
