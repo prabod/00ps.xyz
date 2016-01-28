@@ -29,8 +29,10 @@ function shareFb() {
   }(document, 'script', 'facebook-jssdk'));
   FB.ui({
     method: 'feed',
-    link: window.location.href,
-    caption: 'An example caption',
+    link: $("meta[property='og:url']").attr("content"),
+    caption: $("meta[property='og:description']").attr("content"),
+    image : $("meta[property='og:image']").attr("content"),
+    scrape : true
   }, function(response) {});
 }
 
