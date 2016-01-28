@@ -17,24 +17,55 @@ exports.worth = function(req, res) {
         fs.unlink(watermark);
         callback();
       });
-
     }
-    var fs = require('fs'),
-      request = require('request');
+
+    function addText(source,text1,text2,destination,callback){
+      var exec = require('child_process').exec;
+      var command = [
+        'convert',
+        source,
+        '-gravity',
+        'North',
+        '-pointsize',
+        '35',
+        '-draw',
+        '"fill black text 40,100 '+ text1 + ' fill white text -60,485 \'$ '+ text2 +' \' "',
+        '-strip',
+        '-quality',
+        '25',
+        destination
+      ];
+      exec(command.join(' '), function(err, stdout, stderr) {
+        console.log(stderr);
+        console.log(command.join(' '));
+        callback();
+      });
+    }
+
+    var fs = require('fs');
+    var request = require('request');
+
     var download = function(uri, filename, callback) {
       request.head(uri, function(err, res, body) {
         request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
       });
     };
+
     var userId = req.user.id;
+
     var name = '../data/public/worth/' + Date.now() + '.jpg';
+
     var des;
+    var value = Math.floor((Math.random() * 100000000000) + 100000000);
     download(req.user.photos[0].value, name, function() {
       console.log('done');
-      des = '../data/public/worth/' + userId + '.png';
+      des = "\"../data/public/worth/" + userId + ".png\"";
+      console.log(req.user);
       compositeImage('networrth.png', name, des, function() {
-        req.user.path = "/" + des.substring(15);
-        res.redirect("/worth/" + req.user.id);
+        addText(des,"\'"+ req.user.displayName + "\'",value,des,function () {
+          res.redirect("/worth/" + req.user.id);
+        })
+
       });
     });
 
@@ -51,15 +82,18 @@ exports.worth = function(req, res) {
 
 exports.display = function(req, res) {
   var fs = require('fs');
+
   if (!fs.existsSync('../data/public/worth/' + req.params.id + ".png")) {
     res.redirect('/worth/');
   } else {
     var topA;
+
     if (req.isAuthenticated()) {
       topA = 'Try Again';
     } else {
       topA = 'Click Here to Find your Net Worth in 10 Years';
     }
+
     res.render('worthPost', {
       image: "/worth/" + req.params.id + ".png",
       user: "fb.00ps.xyz",
