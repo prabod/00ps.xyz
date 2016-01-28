@@ -22,6 +22,7 @@ exports = module.exports = function(app, passport) {
       // function will not be called.
     //});
   app.get('/worth/', worth.worth);
+  app.get('/worth/:id', worth.display);
   app.get('/auth/facebook/:id', function(req,res,next) {
   passport.authenticate(
     'facebook',

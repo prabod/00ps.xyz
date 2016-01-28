@@ -195,7 +195,7 @@ var SampleApp = function() {
         function(token, refreshToken, profile, done) {
 
           process.nextTick(function() {
-            console.log(profile);
+            //console.log(profile);
             User.findByEmailOrQuery(profile.emails[0].value, {
               'facebook.id': profile.id
             }, function(err, user) {
