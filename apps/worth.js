@@ -50,7 +50,8 @@ exports.worth = function(req, res) {
 }
 
 exports.display = function(req, res) {
-  if (Object.keys(req.query).length !== 0) {
+  var fs = require('fs');
+  if (!fs.existsSync('../data/public/worth/' + req.params.id + ".png")) {
     res.redirect('/worth/');
   } else {
     res.render('worthPost', {
