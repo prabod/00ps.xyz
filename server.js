@@ -163,6 +163,7 @@ var SampleApp = function() {
     self.app.use(passport.session());
     self.app.use(express.static(__dirname + '/public'));
     self.app.use(require('serve-static')('../data/public'));
+    self.app.set('strict routing', true);
     self.app.get('/', function(req, res) {
       res.render('base');
     });

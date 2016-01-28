@@ -25,16 +25,16 @@ exports = module.exports = function(app, passport) {
   app.get('/auth/facebook/:id', function(req,res,next) {
   passport.authenticate(
     'facebook',
-     {callbackURL: '/auth/facebook/login_callback/'+req.params.id }
+     {callbackURL: '/auth/facebook/login_callback/'+req.params.id + "/" }
   )(req,res,next);
 });
 
-app.get('/auth/facebook/login_callback/:id', function(req,res,next) {
+app.get('/auth/facebook/login_callback/:id/', function(req,res,next) {
   passport.authenticate(
     'facebook',
      {
-       callbackURL:"/auth/facebook/login_callback/"+req.params.id
-     , successRedirect:"/"+req.params.id
+       callbackURL:"/auth/facebook/login_callback/"+req.params.id +"/"
+     , successRedirect:"/"+req.params.id + "/"
      , failureRedirect:"/"
      }
    ) (req,res,next);
