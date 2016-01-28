@@ -49,6 +49,7 @@ exports.worth = function(req, res) {
 }
 
 exports.display = function(req, res) {
+  if (req.isAuthenticated()) {
   res.render('worthPost', {
     image: "http://fb.00ps.xyz/worth/"+req.params.id+".png",
     user : req.params.id,
@@ -58,4 +59,8 @@ exports.display = function(req, res) {
     IDecription: "Click Here to Find your Net Worth in 10 Years",
     imageLink: "http://fb.00ps.xyz/worth/"+req.params.id+".png"
   });
+}
+else {
+  res.redirect('/worth/');
+}
 }
