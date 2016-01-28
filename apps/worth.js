@@ -1,6 +1,7 @@
 exports.worth = function(req, res) {
   if (req.isAuthenticated()) {
     var fb = require('fb');
+
     function compositeImage(source, watermark, destination, callback) {
       var exec = require('child_process').exec;
       var command = [
@@ -33,15 +34,7 @@ exports.worth = function(req, res) {
       des = '../data/public/worth/' + userId + '.png';
       compositeImage('networrth.png', name, des, function() {
         req.user.path = "/" + des.substring(15);
-        res.render('worthPost', {
-          image: "/worth/"+req.user.id+".png",
-          user : "fb.00ps.xyz",
-          title: "Find Your Net Worth in 10 Years",
-          url: "http://fb.00ps.xyz/worth/",
-          description: "Click Here to Find your Net Worth in 10 Years",
-          IDecription: "Click Here to Find your Net Worth in 10 Years",
-          imageLink: "http://fb.00ps.xyz/worth/"+req.user.id+".png"
-        });
+        res.redirect("/worth/" + req.user.id);
       });
     });
 
@@ -57,13 +50,17 @@ exports.worth = function(req, res) {
 }
 
 exports.display = function(req, res) {
-  res.render('worthPost', {
-    image: "/worth/"+req.params.id+".png",
-    user : "fb.00ps.xyz",
-    title: "Find Your Net Worth in 10 Years",
-    url: "http://fb.00ps.xyz/worth/",
-    description: "Click Here to Find your Net Worth in 10 Years",
-    IDecription: "Click Here to Find your Net Worth in 10 Years",
-    imageLink: "http://fb.00ps.xyz/worth/"+req.params.id+".png"
-  });
+  if (res.query.res) {
+    res.redirect('/worth/');
+  } else {
+    res.render('worthPost', {
+      image: "/worth/" + req.params.id + ".png",
+      user: "fb.00ps.xyz",
+      title: "Find Your Net Worth in 10 Years",
+      url: "http://fb.00ps.xyz/worth/" + req.params.id,
+      description: "Click Here to Find your Net Worth in 10 Years",
+      IDecription: "Click Here to Find your Net Worth in 10 Years",
+      imageLink: "http://fb.00ps.xyz/worth/" + req.params.id + ".png"
+    });
+  }
 }
