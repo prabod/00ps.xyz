@@ -52,7 +52,7 @@ exports.display = function(req, res) {
   if (req.isAuthenticated()) {
   res.render('worthPost', {
     image: "http://fb.00ps.xyz/worth/"+req.params.id+".png",
-    user : req.params.id,
+    user : req.user.displayName,
     title: "Find Your Net Worth in 10 Years",
     url: "http://fb.00ps.xyz/worth/"+req.params.id,
     description: "Click Here to Find your Net Worth in 10 Years",
