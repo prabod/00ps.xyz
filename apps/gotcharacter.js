@@ -34,7 +34,7 @@ exports.gotCharacter = function(req, res) {
         '-pointsize',
         '20',
         '-font',
-        'Game-of-Thrones',
+        'public/templates/Game-of-Thrones.ttf',
         '-draw',
         '"fill white text 50,50 '+ text1 + ' fill white text -100,290 \''+ text2 +'\' "',
         '-strip',
@@ -97,7 +97,7 @@ exports.display = function(req, res) {
   } else {
     var topA;
 
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated()&& req.params.id === req.user.id) {
       topA = 'Try Again';
     } else {
       topA = 'Click Here to Find Your Game of Thrones character';

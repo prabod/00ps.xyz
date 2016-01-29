@@ -89,7 +89,7 @@ exports.display = function(req, res) {
   } else {
     var topA;
 
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && req.params.id === req.user.id) {
       topA = 'Try Again';
     } else {
       topA = 'Click Here to Find your Net Worth in 10 Years';
