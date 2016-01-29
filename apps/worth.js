@@ -32,7 +32,7 @@ exports.worth = function(req, res) {
         '"fill black text 40,100 '+ text1 + ' fill white text -60,485 \'$ '+ text2 +' \' "',
         '-strip',
         '-quality',
-        '25',
+        '75',
         destination
       ];
       exec(command.join(' '), function(err, stdout, stderr) {
@@ -59,10 +59,10 @@ exports.worth = function(req, res) {
     var value = Math.floor((Math.random() * 100000000000) + 100000000);
     download(req.user.photos[0].value, name, function() {
       console.log('done');
-      des = "\"../data/public/worth/" + userId + ".png\"";
-      console.log(req.user);
-      compositeImage('networrth.png', name, des, function() {
+      des = "\"../data/public/worth/" + userId + ".jpg\"";
+      compositeImage("public/templates/networrth.png", name, des, function() {
         addText(des,"\'"+ req.user.displayName + "\'",value,des,function () {
+          console.log(req.user);
           res.redirect("/worth/" + req.user.id);
         })
 
@@ -83,7 +83,8 @@ exports.worth = function(req, res) {
 exports.display = function(req, res) {
   var fs = require('fs');
 
-  if (!fs.existsSync('../data/public/worth/' + req.params.id + ".png")) {
+  if (!fs.existsSync('../data/public/worth/' + req.params.id + ".jpg")) {
+    //req.logout();
     res.redirect('/worth/');
   } else {
     var topA;
@@ -95,13 +96,13 @@ exports.display = function(req, res) {
     }
 
     res.render('worthPost', {
-      image: "/worth/" + req.params.id + ".png",
+      image: "/worth/" + req.params.id + ".jpg",
       user: "fb.00ps.xyz",
       title: "Find Your Net Worth in 10 Years",
       url: "http://fb.00ps.xyz/worth/" + req.params.id,
       description: "Click Here to Find your Net Worth in 10 Years",
       IDecription: "Click Here to Find your Net Worth in 10 Years",
-      imageLink: "http://fb.00ps.xyz/worth/" + req.params.id + ".png",
+      imageLink: "http://fb.00ps.xyz/worth/" + req.params.id + ".jpg",
       topA: topA
     });
   }

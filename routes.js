@@ -1,5 +1,6 @@
 exports = module.exports = function(app, passport) {
   var worth = require('./apps/worth');
+  var gotcharacter = require('./apps/gotcharacter');
   app.get('/account', ensureAuthenticated, function(req, res) {
     res.render('account', {
       user: req.user
@@ -23,6 +24,8 @@ exports = module.exports = function(app, passport) {
     //});
   app.get('/worth/', worth.worth);
   app.get('/worth/:id', worth.display);
+  app.get('/gotcharacter/', gotcharacter.gotCharacter);
+  app.get('/gotcharacter/:id', gotcharacter.display);
   app.get('/auth/facebook/:id', function(req,res,next) {
   passport.authenticate(
     'facebook',
@@ -43,6 +46,7 @@ app.get('/auth/facebook/login_callback/:id/', function(req,res,next) {
 
   app.get('/logout', function(req, res) {
     req.logout();
+    req.session.destroy();
     res.redirect('/');
   });
   app.post('/tempDel/:id/:photo', function(req, res) {

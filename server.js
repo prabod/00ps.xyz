@@ -63,7 +63,7 @@ var SampleApp = function() {
     }
 
     //  Local cache for static content.
-    self.zcache['index.html'] = fs.readFileSync('./index.html');
+    //self.zcache['index.html'] = fs.readFileSync('./index.html');
   };
 
 
@@ -190,7 +190,7 @@ var SampleApp = function() {
           clientID: FACEBOOK_APP_ID,
           clientSecret: FACEBOOK_APP_SECRET,
           //callbackURL: "http://" + self.ipaddress + ":" + self.port + "/auth/facebook/callback/:id",
-          profileFields: ['id', 'displayName', 'email', 'picture.height(125).width(125)']
+          profileFields: ['id', 'displayName', 'email', 'picture.height(125).width(125)','gender']
         },
         function(token, refreshToken, profile, done) {
 
