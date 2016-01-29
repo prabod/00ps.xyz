@@ -29,7 +29,8 @@ exports = module.exports = function(app, passport) {
   app.get('/auth/facebook/:id', function(req,res,next) {
   passport.authenticate(
     'facebook',
-     {callbackURL: '/auth/facebook/login_callback/'+req.params.id  }
+     {callbackURL: '/auth/facebook/login_callback/'+req.params.id,
+      scope : ['user_friends','email']}
   )(req,res,next);
 });
 
@@ -39,7 +40,8 @@ app.get('/auth/facebook/login_callback/:id', function(req,res,next) {
      {
        callbackURL:"/auth/facebook/login_callback/"+req.params.id
      , successRedirect:"/"+req.params.id + "/"
-     , failureRedirect:"/"
+     , failureRedirect:"/",
+     scope : ['user_friends','email']
      }
    ) (req,res,next);
  });
