@@ -206,7 +206,7 @@ var SampleApp = function() {
               user.facebook.id = profile.id;
               user.facebook.token = token;
               user.facebook.name = profile.displayName;
-              if profile.has(emails) {
+              if (profile.has(emails)) {
                 user.email = profile.emails[0].value;
               }
               user.save(function(err) {
