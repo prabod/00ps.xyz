@@ -136,7 +136,7 @@ var SampleApp = function() {
     autoIncrement.initialize(self.app.db);
     //self.app.autoIncrement = autoIncrement;
     //self.app.db.once('open', function() {
-      //and... we have a data store
+    //and... we have a data store
     //});
 
 
@@ -187,7 +187,7 @@ var SampleApp = function() {
           clientID: FACEBOOK_APP_ID,
           clientSecret: FACEBOOK_APP_SECRET,
           //callbackURL: "http://" + self.ipaddress + ":" + self.port + "/auth/facebook/callback/:id",
-          profileFields: ['id', 'displayName', 'email', 'picture.height(125).width(125)','gender']
+          profileFields: ['id', 'displayName', 'email', 'picture.height(125).width(125)', 'gender']
         },
         function(token, refreshToken, profile, done) {
 
@@ -206,8 +206,9 @@ var SampleApp = function() {
               user.facebook.id = profile.id;
               user.facebook.token = token;
               user.facebook.name = profile.displayName;
-              user.email = profile.emails[0].value;
-
+              if profile.has(emails) {
+                user.email = profile.emails[0].value;
+              }
               user.save(function(err) {
                 if (err) throw err;
                 return done(null, profile);
