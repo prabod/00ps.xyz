@@ -22,8 +22,15 @@ exports = module.exports = function(app, passport) {
       // The request will be redirected to Facebook for authentication, so this
       // function will not be called.
     //});
-  app.get('/test',function (req,res) {
-    res.render('index');
+  app.get('/',function (req,res) {
+    res.render('index',{
+      title: "00ps.xyz | Best Facebook Quizes",
+      user: "fb.00ps.xyz",
+      url: "http://fb.00ps.xyz/",
+      description: "00ps.xyz | Best Facebook Quizes",
+      IDecription: "00ps.xyz | Best Facebook Quizes",
+      imageLink: "",
+    });
   });
   app.get('/worth/', worth.worth);
   app.get('/worth/:id', worth.display);
@@ -60,13 +67,13 @@ app.get('/auth/facebook/login_callback/:id', function(req,res,next) {
     fs.unlinkSync('../data/public/' + req.params.id + "/" + req.params.photo);
   })
   app.all("*",function (req,res) {
-    res.render('404'{
+    res.render('404',{
       title: "Sorry The Requested Page is Not Available",
       user: "fb.00ps.xyz",
       url: "http://fb.00ps.xyz/",
       description: "Sorry The Requested Page is Not Available",
       IDecription: "Sorry The Requested Page is Not Available",
-      imageLink: "http://fb.00ps.xyz/'/images/pages/404.png'",
+      imageLink: "http://fb.00ps.xyz/images/pages/404.png",
     });
   });
   function ensureAuthenticated(req, res, next) {
