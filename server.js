@@ -193,7 +193,11 @@ var SampleApp = function() {
 
           process.nextTick(function() {
             console.log(profile);
-            User.findByEmailOrQuery(profile.emails[0].value, {
+            var mail = ' ';
+            if (profile.has(emails)){
+              mail = profile.emails[0].value;
+            }
+            User.findByEmailOrQuery(mail, {
               'facebook.id': profile.id
             }, function(err, user) {
 
