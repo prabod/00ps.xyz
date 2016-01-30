@@ -79,12 +79,16 @@ exports.gotCharacter = function(req, res) {
     });
 
   } else {
-    res.render('gotcharacterPre', {
+    res.render('appPre', {
       title: "Find Your Game of Thrones character",
       url: "http://fb.00ps.xyz/gotcharacter/",
       description: "Click Here to Find Your Game of Thrones character",
       IDecription: "Click Here to Find Your Game of Thrones character",
-      imageLink: ""
+      image : "/templates/gotCharcover.png",
+      imageLink: "http://fb.00ps.xyz/templates/gotCharcover.png",
+      topA : "Click Here to Find Your Game of Thrones character",
+      app :'/gotcharacter/',
+      authenticated : false
     });
   }
 }
@@ -93,17 +97,20 @@ exports.display = function(req, res) {
   var fs = require('fs');
 
   if (!fs.existsSync('../data/public/gotChar/' + req.params.id + ".jpg")) {
-    res.redirect('/gotcharacter/');
+    console.log(req.params.id);
+      res.redirect('/gotcharacter/');
   } else {
     var topA;
-
-    if (req.isAuthenticated()&& req.params.id === req.user.id) {
+    var authe= false;
+    if (req.isAuthenticated() && req.params.id === req.user.id) {
       topA = 'Try Again';
+      authe = true;
     } else {
       topA = 'Click Here to Find Your Game of Thrones character';
+      authe = true;
     }
 
-    res.render('gotcharacterPost', {
+    res.render('appPre', {
       image: "/gotChar/" + req.params.id + ".jpg",
       user: "fb.00ps.xyz",
       title: "Find Your Game of Thrones character",
@@ -111,7 +118,9 @@ exports.display = function(req, res) {
       description: "Click Here to Find Your Game of Thrones character",
       IDecription: "Click Here to Find Your Game of Thrones character",
       imageLink: "http://fb.00ps.xyz/gotChar/" + req.params.id + ".jpg",
-      topA: topA
+      topA: topA,
+      "app" :'/gotcharacter/',
+      "authenticated" : authe
     });
   }
 }

@@ -1,0 +1,229 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    // this line will appear only if the website is visited with an iPad
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes')
+    meta(property='fb:app_id', content='1653824821565450')
+    meta(name='author', content="#{user}")
+    
+    link(rel='canonical', href="#{url}")
+    meta(name='description', content="#{description}")
+    meta(property='og:type', content='website')
+    meta(property='og:url', content="#{url}")
+    meta(property='og:title', content="#{title}")
+    meta(property='og:description', content="#{IDecription}")
+    meta(property='og:image', content="#{imageLink}")
+    meta(property='og:image:type', content='image/jpeg')
+    meta(property='og:image:width', content='720')
+    meta(property='og:image:height', content='378')
+    
+    title #{title}
+    // RESET STYLESHEET
+    link(rel='stylesheet', type='text/css', media='all', href='/css/reset.css')
+    // BOOTSTRAP STYLESHEET
+    link(rel='stylesheet', type='text/css', media='all', href='/css/bootstrap.css')
+    // MAIN THEME STYLESHEET
+    link(rel='stylesheet', type='text/css', media='all', href='/style.css')
+    link#custom-css(rel='stylesheet', href='/css/custom.css', type='text/css', media='all')
+    link#google-fonts-css(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Oswald%7CDroid+Sans%7CPlayfair+Display%7COpen+Sans+Condensed:300,400,800%3A300%7CRokkitt%7CShadows+Into+Light%7CMaven+Pro:400,700%7CAbel%7CMontez', type='text/css', media='all')
+    link#responsive-css(rel='stylesheet', href='/css/responsive.css', type='text/css', media='all')
+    link#thickbox-css(rel='stylesheet', href='/js/thickbox/thickbox.css', type='text/css', media='all')
+    link#tipsy-css(rel='stylesheet', href='/css/tipsy.css', type='text/css', media='all')
+    link#fonts-css(rel='stylesheet', href='/css/font-awesome.css', type='text/css', media='all')
+    link#shortcode-css(rel='stylesheet', href='/css/shortcodes.css', type='text/css', media='all')
+    link#colorbox-css(rel='stylesheet', href='/css/colorbox.css', type='text/css', media='all')
+    link#custom-button-mfast-3-css(rel='stylesheet', href='/css/buttons/mfast-3.css', type='text/css', media='all')
+    link#elegant-css(rel='stylesheet', href='/css/elegant/css/style.css', type='text/css', media='all')
+    link#custom-button-mfast-3-css(rel='stylesheet', href='/css/buttons/mfast-3.css', type='text/css', media='all')
+    link#custom-button-mfast-3-css(rel='stylesheet', href='/css/buttons/ultraviolet-rays-1.css', type='text/css', media='all')
+    // [favicon] begin
+    link(rel='shortcut icon', type='image/x-icon', href='/favicon.ico')
+    link(rel='icon', type='image/x-icon', href='/favicon.ico')
+    // [favicon] end
+    // Touch icons more info: http://mathiasbynens.be/notes/touch-icons
+    // For iPad3 with retina display:
+    link(rel='apple-touch-icon-precomposed', sizes='144x144', href='/apple-touch-icon-144x.png')
+    // For first- and second-generation iPad:
+    link(rel='apple-touch-icon-precomposed', sizes='114x114', href='/apple-touch-icon-114x.png')
+    // For first- and second-generation iPad:
+    link(rel='apple-touch-icon-precomposed', sizes='72x72', href='/apple-touch-icon-72x.png')
+    // For non-Retina iPhone, iPod Touch, and Android 2.1+ devices:
+    link(rel='apple-touch-icon-precomposed', href='/apple-touch-icon-57x.png')
+    script(type='text/javascript', src='/js/jquery/jquery.js')
+    
+  body.home.page.no_js.responsive.stretched
+    script.
+      window.fbAsyncInit = function() {
+      FB.init({
+      appId      : '1653824821565450',
+      xfbml      : true,
+      version    : 'v2.5'
+      });
+      };
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    // START BG SHADOW
+    .bg-shadow
+      // START WRAPPER
+      #wrapper.container.group
+        // START TOP BAR
+        // START TOP BAR
+        #topbar
+          .container
+            .row
+              #last-tweets-3.widget-first.span6.widget.last-tweets
+                h3 Last Tweets
+                .list-tweets-3
+                script(type='text/javascript').
+                  jQuery(function($){
+                  $('#last-tweets-3 .list-tweets-3').tweetable({
+                  listClass: 'tweets-widget-3',
+                  username: 'YIW',
+                  time: false,
+                  limit: 3,
+                  replies: false
+                  });
+                  });
+              #text-8.widget-last.span6.widget.widget_text
+                .textwidget
+                  a.socials-small.facebook-small(href='# ', title='Facebook') facebook
+                  a.socials-small.rss-small(href='#', title='Rss') rss
+                  a.socials-small.twitter-small(href='#', title='Twitter') twitter
+                  a.socials-small.google-small(href='#', title='Google') google
+                  a.socials-small.linkedin-small(href='#', title='Linkedin') linkedin
+                  a.socials-small.pinterest-small(href='#', title='Pinterest') pinterest
+                .textwidget
+                  if  authenticated
+                    a(href='/logout') Log Out
+        script.
+          jQuery(function($){
+          var twitterSlider = function(){
+          $('#topbar .last-tweets ul').addClass('slides');
+          $('#topbar .last-tweets').flexslider({
+          animation: "fade",
+          slideshowSpeed: 5 * 1000,
+          animationDuration: 700,
+          directionNav: false,
+          controlNav: false,
+          keyboardNav: false
+          });
+          };
+          $('#topbar .last-tweets > div').bind('tweetable_loaded', function(){
+          twitterSlider();
+          });
+          });
+        // END TOP BAR
+        // START HEADER
+        #header.group
+          .group.container
+            .row
+              .span12
+                .row
+                  // START LOGO
+                  #logo.span4.group
+                    a#logo-img(href='/', title='celestino')
+                      img(src='/images/celestino1.png', title='celestino', alt='celestino')
+                    p#tagline Best Facebook Quizes.
+                  // END LOGO
+                  #menu.span8.group
+                    // START MAIN NAVIGATION
+                    .menu
+                      ul#nav.sf-menu
+                        li.nav-icon-home.current_page_item
+                          a(href='/')
+                            | Home
+                        li.nav-icon-doc
+                          a(href='#')
+                            | Privacy Policy
+                        li.nav-icon-works
+                          a(href='#')
+                            | About Us
+                        li.nav-icon-contact
+                          a(href='#')
+                            | Contact Us
+                    // END MAIN NAVIGATION
+          #border-header
+        // END HEADER
+        center
+          h2 #{title}
+        #primary.sidebar-right
+        .container.group
+          .row
+            #content-index.span9.content.group
+              .post.type-post.status-publish.format-gallery.hentry.category-web-design.tag-design.tag-developing.tag-web.hentry-post.group.blog-elegant
+                // post featured & title
+                .thumbnail
+                  .row
+                    // post meta
+                    .meta.group.span2
+                    
+                    .the-content.span7
+                      div
+                        img.thumbnail.wp-post-image(width='720', height='378', src="#{image}")
+                        
+                        .the-content
+                          br
+                          if authenticated
+                            button#sharefb.btn.btn-ultraviolet-rays-1.btn-block.btn-lg(type='button' onClick='shareFb()')
+                              | Share On Facebook
+                            br
+                            a.btn.btn-the-salmon-dance-2.btn-lg.btn-block(href= "#{app}" , type='button', contenteditable='false', autocomplete='off') #{topA}
+                          else
+                            a(href='/auth/facebook' + "#{app}")
+                              center
+                                img(src='/images/log-in-with-fb.png')
+                        .the-content
+                          .fb-comments(data-href='http://fb.00ps.xyz'+"#{app}", data-width='600', data-numposts='5')
+            #sidebar-blog-sidebar.span3.sidebar.group
+              #text-9.widget-first.widget.widget_text
+                  
+              #last-tweets-4.widget-2.widget-last.widget.last-tweets
+                h3 Like Our Page
+                .list-tweets-4
+                  .fb-page(data-href='https://www.facebook.com/00ps.xyz', data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
+                    .fb-xfbml-parse-ignore
+                      blockquote(cite='https://www.facebook.com/00ps.xyz')
+                        a(href='https://www.facebook.com/00ps.xyz') 00ps Apps
+
+        #footer
+          .container
+            .row
+              div
+                .widget-first.widget.span3.recent-posts
+                  
+                .widget.span3.widget_flickrRSS
+                  
+                .widget.span3.contact-info
+                  
+                #last-tweets-2.widget.span3.last-tweets
+                                
+                                
+        #copyright
+              .container
+                .row
+                  .left.span6
+                  .right.span6
+                    p
+                      | Powered by
+                      a(href='http://fb.00ps.xyz/', title='')
+                        strong 00ps.xyz
+                        
+    script(type='text/javascript', src='/js/jquery.colorbox-min.js')
+    script(type='text/javascript', src='/js/jquery.tweetable.js')
+    script(type='text/javascript', src='/js/jquery.superfish.js')
+    script(type='text/javascript', src='/js/jquery.themepunch.plugins.min.js')
+    script(type='text/javascript', src='/js/jquery.tipsy.js')
+    script(type='text/javascript', src='/js/responsive.js')
+    script(type='text/javascript', src='/js/jquery.mobilemenu.js')
+    script(type='text/javascript', src='/js/shortcodes.js')
+    script(type='text/javascript', src='/js/jquery/jquery.masonry.min.js')
+    script(type='text/javascript', src='/js/jquery.custom.js')
+    script(src='/js/scripts.js')
+
+        

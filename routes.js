@@ -22,11 +22,14 @@ exports = module.exports = function(app, passport) {
       // The request will be redirected to Facebook for authentication, so this
       // function will not be called.
     //});
+  app.get('/test',function (req,res) {
+    res.render('index');
+  });
   app.get('/worth/', worth.worth);
   app.get('/worth/:id', worth.display);
   app.get('/gotcharacter/', gotcharacter.gotCharacter);
   app.get('/gotcharacter/:id', gotcharacter.display);
-  app.get('/auth/facebook/:id', function(req,res,next) {
+  app.get('/auth/facebook/:id/', function(req,res,next) {
   passport.authenticate(
     'facebook',
      {callbackURL: '/auth/facebook/login_callback/'+req.params.id,
@@ -56,7 +59,16 @@ app.get('/auth/facebook/login_callback/:id', function(req,res,next) {
     console.log(req.params.id);
     fs.unlinkSync('../data/public/' + req.params.id + "/" + req.params.photo);
   })
-
+  app.all("*",function (req,res) {
+    res.render('404'{
+      title: "Sorry The Requested Page is Not Available",
+      user: "fb.00ps.xyz",
+      url: "http://fb.00ps.xyz/",
+      description: "Sorry The Requested Page is Not Available",
+      IDecription: "Sorry The Requested Page is Not Available",
+      imageLink: "http://fb.00ps.xyz/'/images/pages/404.png'",
+    });
+  });
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
