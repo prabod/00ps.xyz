@@ -194,7 +194,7 @@ var SampleApp = function() {
           process.nextTick(function() {
             console.log(profile);
             var mail = ' ';
-            if (profile.has(emails)){
+            if (profile.hasOwnProperty('emails')){
               mail = profile.emails[0].value;
             }
             User.findByEmailOrQuery(mail, {
@@ -210,7 +210,7 @@ var SampleApp = function() {
               user.facebook.id = profile.id;
               user.facebook.token = token;
               user.facebook.name = profile.displayName;
-              if (profile.has(emails)) {
+              if (profile.hasOwnProperty('emails')) {
                 user.email = profile.emails[0].value;
               }
               user.save(function(err) {
