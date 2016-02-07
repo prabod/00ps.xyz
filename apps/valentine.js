@@ -29,7 +29,7 @@ exports.valentine = function(req, res) {
         '-pointsize',
         '35',
         '-draw',
-        '"fill white text 40,50 '+ text1 + ' fill white text -20,250 \'$ '+ text2 +' \' "',
+        '"fill white text 40,50 '+ text1 + ' fill white text -20,250 '+ text2 +' \' "',
         '-strip',
         '-quality',
         '75',
@@ -56,8 +56,8 @@ exports.valentine = function(req, res) {
     var name = '../data/public/valentine/' + Date.now() + '.jpg';
 
     var des;
-
-
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var value = possible.charAt(Math.floor(Math.random() * possible.length));
 
     download(req.user.photos[0].value, name, function() {
       console.log('done');
