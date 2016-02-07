@@ -44,4 +44,5 @@ function shareFb() {
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-72946878-1', 'auto');
+  ga('set', 'userId', {{window.location.href.split('/').slice(-2,-1).join('')}}); // Set the user ID using signed-in user_id.
   ga('send', 'pageview');
