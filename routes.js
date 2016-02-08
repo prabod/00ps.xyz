@@ -2,6 +2,7 @@ exports = module.exports = function(app, passport) {
   var worth = require('./apps/worth');
   var gotcharacter = require('./apps/gotcharacter');
   var valentine = require('./apps/valentine');
+  var valentinegift = require('./apps/valentinegift');
   app.get('/account', ensureAuthenticated, function(req, res) {
     res.render('account', {
       user: req.user
@@ -35,10 +36,16 @@ exports = module.exports = function(app, passport) {
   });
   app.get('/worth/', worth.worth);
   app.get('/worth/:id', worth.display);
+
   app.get('/gotcharacter/', gotcharacter.gotCharacter);
   app.get('/gotcharacter/:id', gotcharacter.display);
+
   app.get('/valentine/', valentine.valentine);
   app.get('/valentine/:id', valentine.display);
+
+  app.get('/valentinegift/', valentinegift.valentinegift);
+  app.get('/valentinegift/:id', valentinegift.display);
+
   app.get('/auth/facebook/:id/', function(req,res,next) {
   passport.authenticate(
     'facebook',
