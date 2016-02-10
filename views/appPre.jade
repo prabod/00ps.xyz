@@ -179,6 +179,7 @@ html
                       
                     .the-content.span7
                       div
+                        .fb-like(data-href='https://www.facebook.com/00ps.xyz/', data-layout='standard', data-action='like', data-show-faces='true', data-share='true')
                         img.thumbnail.wp-post-image(width='720', height='378', src="#{image}")
                         
                         .the-content
@@ -189,6 +190,10 @@ html
                             br
                             a.btn.btn-the-salmon-dance-2.btn-lg.btn-block(href= "#{app}" , type='button', contenteditable='false', autocomplete='off') #{topA}
                           else
+                            center
+                              p
+                                strong
+                                  |To Find Yours
                             a(href='/auth/facebook' + "#{app}")
                               center
                                 img(src='/images/log-in-with-fb.png')
@@ -199,7 +204,69 @@ html
                             script.
                               (adsbygoogle = window.adsbygoogle || []).push({});
                             
-                          .fb-comments(data-href='http://fb.00ps.xyz'+"#{app}", data-width='600', data-numposts='5')
+                          //.fb-comments(data-href='http://fb.00ps.xyz'+"#{app}", data-width='600', data-numposts='5')
+                          ul#portfolio.columns.columns.thumbnails
+                            li.first.slide-1.work.span3.first
+                              .picture_overlay
+                                img.attachment-thumb_portfolio_4cols(width='260', height='172', src='/templates/networthcover.png', alt='001')
+                                .overlay
+                                  div
+                                    p
+                                      a(href='/worth/')
+                                        img(src='/images/icons/project.png', alt='')
+                                    p.title Click to Find Out
+                                    p.subtitle
+                              h4
+                                a(href='/worth/') Find Your Net Worth After 10 Years
+                            li.slide-2.work.span3
+                              .picture_overlay
+                                img.attachment-thumb_portfolio_4cols(width='260', height='172', src='/templates/gotCharcover.png', alt='002')
+                                .overlay
+                                  div
+                                    p
+                                      a(href='/gotcharacter/')
+                                        img(src='/images/icons/project.png', alt='')
+                                    p.title Click to Find Out
+                                    p.subtitle 
+                              h4
+                                a(href='/gotcharacter/') Find Your Game of Thrones Character
+                            li.slide-3.work.span3
+                              .picture_overlay
+                                img.attachment-thumb_portfolio_4cols(width='260', height='172', src='/templates/valentinecover.png', alt='003')
+                                .overlay
+                                  div
+                                    p
+                                      a(href='/valentine/')
+                                        img(src='/images/icons/project.png', alt='')
+                                    p.title Click to Find Out
+                                    p.subtitle 
+                              h4
+                                a(href='/valentine/') Find the First Letter of your Valentine's Name
+                                
+                              li.last.slide-4.work.span3
+                                .picture_overlay
+                                  img.attachment-thumb_portfolio_4cols(width='260', height='172', src='/templates/valentinegiftCover.png', alt='004')
+                                  .overlay
+                                    div
+                                      p
+                                        a(href='/valentinegift/')
+                                          img(src='/images/icons/project.png', alt='')
+                                      p.title Click to Find Out
+                                      p.subtitle 
+                                h4
+                                  a(href='/valentinegift/') Find The Gift you are Going to Get for Valentine
+                              li.first.slide-1.work.span3
+                                .picture_overlay
+                                  img.attachment-thumb_portfolio_4cols(width='260', height='172', src='/templates/proposalcover.png', alt='004')
+                                  .overlay
+                                    div
+                                      p
+                                        a(href='/proposal/')
+                                          img(src='/images/icons/project.png', alt='')
+                                      p.title Click to Find Out
+                                      p.subtitle 
+                                h4
+                                  a(href='/proposal/') Find The Number of Proposals You Get for This Valentine
             #sidebar-blog-sidebar.span3.sidebar.group
               #text-9.widget-first.widget.widget_text
                   
